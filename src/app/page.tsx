@@ -2,16 +2,17 @@
 
 import { AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import Hero from '@/components/Hero';
-import AboutSection from '@/components/About';
-import Vision from '@/components/Vision';
-import Mission from '@/components/Mission';
-import Clients from '@/components/Clients';
-import Services from '@/components/Services';
-import Contact from '@/components/Contact';
-import Preloader from '@/components/Preloader';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
+import Hero from '@/components/home/Hero';
+import AboutSection from '@/components/home/About';
+import Vision from '@/components/home/Vision';
+import Mission from '@/components/home/Mission';
+import Clients from '@/components/home/Clients';
+import OurWork from '@/components/home/OurWork';
+import Services from '@/components/home/Services';
+import JoinTeam from '@/components/home/JoinTeam';
+import Preloader from '@/components/home/Preloader';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -28,14 +29,16 @@ export default function Home() {
         <>
           <Navbar />
           <Hero />
-          <div className="relative">
+          <Clients />
+          {/* Stacking Cards Container — all cards share ONE parent so sticky overlapping works */}
+          <div className="relative z-10 w-full overflow-clip bg-black light-mode-bg">
             <AboutSection />
             <Vision />
             <Mission />
           </div>
-          <Clients />
+          <OurWork />
           <Services />
-          <Contact />
+          <JoinTeam />
           <Footer />
         </>
       )}

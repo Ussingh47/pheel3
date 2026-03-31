@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import { Outfit, Noto_Kufi_Arabic } from 'next/font/google';
+import { Outfit, Noto_Kufi_Arabic, Dancing_Script } from 'next/font/google';
 import './globals.css';
-import SmoothScroll from '@/components/SmoothScroll';
-import Cursor from '@/components/Cursor';
+import SmoothScroll from '@/components/layout/SmoothScroll';
+import Cursor from '@/components/layout/Cursor';
 
 const outfit = Outfit({
   subsets: ['latin'],
@@ -13,6 +13,12 @@ const outfit = Outfit({
 const notoKufiArabic = Noto_Kufi_Arabic({
   subsets: ['arabic'],
   variable: '--font-noto-kufi-arabic',
+  display: 'swap',
+});
+
+const dancingScript = Dancing_Script({
+  subsets: ['latin'],
+  variable: '--font-dancing-script',
   display: 'swap',
 });
 
@@ -28,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${outfit.variable} ${notoKufiArabic.variable} antialiased bg-black text-white selection:bg-cyan-500 selection:text-white overflow-x-hidden`}>
+      <body className={`${outfit.variable} ${notoKufiArabic.variable} ${dancingScript.variable} antialiased bg-black text-white selection:bg-cyan-500 selection:text-white`}>
         <Cursor />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
