@@ -2,25 +2,50 @@
 
 import { useEffect, useState, useRef, useCallback } from 'react';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { Sun, Moon, Rocket } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { Sun, Moon, Rocket, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const NAV_ITEMS = [
     { label: 'HOME', href: '/' },
     { label: 'ABOUT US', href: '/about' },
-    { label: 'SERVICES', href: '/#services' },
+    { 
+        label: 'SERVICES', 
+        href: '/#services',
+        subItems: [
+            { label: 'PRODUCTION', href: '/production' },
+            { label: 'EVENTS', href: '/#services' }
+        ]
+    },
     { label: 'CAREERS', href: '/careers' },
     { label: 'CONTACT US', href: '/contact' },
 ];
 
 export default function Navbar() {
     const pathname = usePathname();
+    const router = useRouter();
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [visible, setVisible] = useState(true);
     const [isDark, setIsDark] = useState(true);
     const [isLightMode, setIsLightMode] = useState(false);
+    const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
     const navRef = useRef<HTMLElement>(null);
+    const dropdownRef = useRef<HTMLLIElement>(null);
+
+    // Close dropdown on click outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setServicesDropdownOpen(false);
+            }
+        };
+
+        if (servicesDropdownOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [servicesDropdownOpen]);
 
     const detectBackground = useCallback(() => {
         if (!navRef.current) return;
@@ -129,6 +154,16 @@ export default function Navbar() {
         setIsLightMode(!isLightMode);
     };
 
+    const handleNavClick = (href: string, hasSubItems: boolean) => {
+        if (hasSubItems) {
+            setServicesDropdownOpen(!servicesDropdownOpen);
+        } else {
+            setMenuOpen(false);
+            setServicesDropdownOpen(false);
+            router.push(href);
+        }
+    };
+
     useEffect(() => {
         if (isLightMode) {
             document.documentElement.classList.add('light-mode');
@@ -162,15 +197,44 @@ export default function Navbar() {
 
                 <ul className="nav-links nav-center-links">
                     {NAV_ITEMS.map((item) => {
+                        const hasSubItems = !!item.subItems;
                         const isActive = pathname === item.href;
+                        
                         return (
-                            <li key={item.label}>
-                                <a
-                                    href={item.href}
-                                    className={isActive ? 'active' : ''}
+                            <li key={item.label} className={hasSubItems ? 'relative' : ''} ref={hasSubItems ? dropdownRef : null}>
+                                <button
+                                    onClick={() => handleNavClick(item.href, hasSubItems)}
+                                    className={`${isActive ? 'active' : ''} flex items-center gap-1 uppercase text-[0.72rem] tracking-[0.12em] font-medium transition-colors hover:text-white group`}
                                 >
-                                    {item.label}
-                                </a>
+                                    <span>{item.label}</span>
+                                    {hasSubItems && (
+                                        <ChevronDown size={12} className={`transition-transform duration-300 ${servicesDropdownOpen ? 'rotate-180' : ''}`} />
+                                    )}
+                                </button>
+
+                                <AnimatePresence>
+                                    {hasSubItems && servicesDropdownOpen && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                                            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                            transition={{ duration: 0.2, ease: "easeOut" }}
+                                            className="absolute top-full left-1/2 -translate-x-1/2 mt-4 min-w-[200px] rounded-2xl overflow-hidden glass-dropdown p-2 border border-white/10"
+                                        >
+                                            {item.subItems!.map((sub) => (
+                                                <a
+                                                    key={sub.label}
+                                                    href={sub.href}
+                                                    onClick={() => setServicesDropdownOpen(false)}
+                                                    className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/10 transition-colors text-[0.7rem] tracking-widest font-black uppercase text-white/80 hover:text-white"
+                                                >
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-[#EC5863]" />
+                                                    {sub.label}
+                                                </a>
+                                            ))}
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </li>
                         );
                     })}
@@ -217,16 +281,44 @@ export default function Navbar() {
             <div
                 className={`mobile-menu ${menuOpen ? 'open' : ''} ${isLightMode ? 'mobile-menu-light' : 'mobile-menu-dark'}`}
             >
-                {NAV_ITEMS.map((item) => (
-                    <a
-                        key={item.label}
-                        href={item.href}
-                        onClick={() => setMenuOpen(false)}
-                        className="mobile-menu-link"
-                    >
-                        {item.label}
-                    </a>
-                ))}
+                {NAV_ITEMS.map((item) => {
+                    const hasSubItems = !!item.subItems;
+                    return (
+                        <div key={item.label} className="w-full flex flex-col items-center">
+                            <button
+                                onClick={() => handleNavClick(item.href, hasSubItems)}
+                                className={`mobile-menu-link ${hasSubItems ? 'flex items-center gap-2' : ''}`}
+                            >
+                                {item.label}
+                                {hasSubItems && (
+                                    <ChevronDown size={14} className={`transition-transform duration-300 ${servicesDropdownOpen ? 'rotate-180' : ''}`} />
+                                )}
+                            </button>
+                            
+                            {hasSubItems && servicesDropdownOpen && (
+                                <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: 'auto', opacity: 1 }}
+                                    className="flex flex-col items-center gap-4 py-2"
+                                >
+                                    {item.subItems!.map((sub) => (
+                                        <a
+                                            key={sub.label}
+                                            href={sub.href}
+                                            onClick={() => {
+                                                setMenuOpen(false);
+                                                setServicesDropdownOpen(false);
+                                            }}
+                                            className="text-[0.8rem] tracking-widest font-bold text-[#EC5863] uppercase"
+                                        >
+                                            {sub.label}
+                                        </a>
+                                    ))}
+                                </motion.div>
+                            )}
+                        </div>
+                    );
+                })}
                 <a
                     href="/assets/Company Profile.docx"
                     download
