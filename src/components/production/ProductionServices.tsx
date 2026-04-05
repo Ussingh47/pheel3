@@ -45,7 +45,7 @@ const ADVERTISEMENT_SERVICES = [
 
 export default function ProductionServices() {
     return (
-        <section className="relative bg-black pt-12 md:pt-20 pb-24 md:pb-44 px-6 overflow-hidden">
+        <section className="relative bg-black pt-12 md:pt-20 pb-12 md:pb-20 px-6 overflow-hidden">
             {/* 1:1 Reference Half-Circle - Reduced Atmosphere */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
                 <div
@@ -62,7 +62,7 @@ export default function ProductionServices() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-[#F7F2ED] text-[40px] md:text-[60px] lg:text-[72px] font-black uppercase mb-20 tracking-tighter"
+                    className="text-[#F7F2ED] text-[26px] sm:text-[34px] md:text-[46px] lg:text-[52px] xl:text-[56px] font-black uppercase mb-10 md:mb-12 tracking-[-0.06em] leading-[0.9]"
                 >
                     PRODUCTION SERVICES
                 </motion.h2>
@@ -97,7 +97,7 @@ export default function ProductionServices() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-[#F7F2ED] text-[40px] md:text-[60px] lg:text-[72px] font-black uppercase mb-20 tracking-tighter"
+                    className="text-[#F7F2ED] text-[26px] sm:text-[34px] md:text-[46px] lg:text-[52px] xl:text-[56px] font-black uppercase mb-10 md:mb-12 tracking-[-0.06em] leading-[0.9]"
                 >
                     ADVERTISEMENT SERVICES
                 </motion.h2>

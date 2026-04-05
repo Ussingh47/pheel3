@@ -53,7 +53,7 @@ export default function ProductionProjects() {
     const [hoveredItem, setHoveredItem] = useState<{ section: number; index: number } | null>(null);
 
     return (
-        <section className="relative bg-black py-24 md:py-32 overflow-hidden">
+        <section className="relative bg-black pt-12 md:pt-16 pb-24 md:pb-32 overflow-hidden">
             {/* Standard Atmosphere - Transitioning between sections */}
             <div className="absolute inset-0 pointer-events-none z-0">
                 {/* Localized Left-Side Atmosphere - Specialized for Documentaries and Short Films */}
@@ -78,10 +78,10 @@ export default function ProductionProjects() {
                         <div key={sectionIdx} className="mb-24 last:mb-0 relative group/section">
                             {/* Title Bar with brand red dash */}
                             <motion.h2
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                className="text-[#F7F2ED] text-2xl md:text-3xl lg:text-4xl font-black uppercase mb-10 md:mb-12 tracking-tight flex items-center gap-4 border-l-4 border-[#E53B49] pl-6 ml-6 lg:ml-0"
+                                className="text-[#F7F2ED] text-[26px] sm:text-[34px] md:text-[46px] lg:text-[52px] xl:text-[56px] font-black uppercase mb-10 md:mb-12 tracking-[-0.06em] leading-[0.9]"
                             >
                                 {section.category}
                             </motion.h2>

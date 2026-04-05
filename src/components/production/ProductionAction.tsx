@@ -37,7 +37,7 @@ export default function ProductionAction() {
                             >
                                 Pheel in
                             </h2>
-                            <h3 className="text-[#F7F2ED] text-[40px] md:text-[60px] lg:text-[72px] font-black uppercase tracking-tighter leading-[0.8] relative z-10">
+                            <h3 className="text-[#F7F2ED] text-[26px] sm:text-[34px] md:text-[46px] lg:text-[52px] xl:text-[56px] font-black uppercase tracking-[-0.06em] leading-[0.9] relative z-10">
                                 ACTION
                             </h3>
 

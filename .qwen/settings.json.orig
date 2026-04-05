@@ -3,6 +3,5 @@
     "allow": [
       "Read(c:\\Users\\umass\\Downloads/**)"
     ]
-  },
-  "$version": 3
+  }
 }
