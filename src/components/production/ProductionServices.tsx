@@ -45,36 +45,46 @@ const ADVERTISEMENT_SERVICES = [
 
 export default function ProductionServices() {
     return (
-        <section className="bg-black py-20 md:py-32 px-6">
-            <div className="container mx-auto max-w-7xl">
+        <section className="relative bg-black pt-12 md:pt-20 pb-24 md:pb-44 px-6 overflow-hidden">
+            {/* 1:1 Reference Half-Circle - Reduced Atmosphere */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                <div
+                    className="absolute inset-0 opacity-70"
+                    style={{
+                        background: 'radial-gradient(circle 1000px at 100% 0%, rgba(229, 59, 73, 0.35) 0%, rgba(229, 59, 73, 0.12) 40%, transparent 100%)'
+                    }}
+                />
+            </div>
+
+            <div className="container mx-auto max-w-7xl relative z-10">
                 {/* Production Services */}
-                <motion.h2 
+                <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-white text-3xl md:text-5xl lg:text-6xl font-black uppercase mb-16 tracking-tighter"
+                    className="text-[#F7F2ED] text-[40px] md:text-[60px] lg:text-[72px] font-black uppercase mb-20 tracking-tighter"
                 >
                     PRODUCTION SERVICES
                 </motion.h2>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-32">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-40">
                     {PRODUCTION_SERVICES.map((service, i) => (
                         <motion.div
                             key={i}
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
-                            className="bg-[#EC5863] p-10 lg:p-12 hover:scale-[1.03] transition-all duration-500 rounded-[4px] flex flex-col justify-between group h-full shadow-[0_20px_60px_rgba(236,88,99,0.25)] relative overflow-hidden"
+                            className="bg-[#E53B49] p-10 lg:p-12 hover:scale-[1.03] transition-all duration-500 rounded-[4px] flex flex-col justify-between group h-full relative overflow-hidden"
                         >
-                            <h3 className="text-white font-black text-7xl md:text-9xl mb-12 opacity-30 group-hover:opacity-100 transition-opacity absolute -top-4 -left-4">
+                            <h3 className="text-white font-black text-8xl md:text-[140px] mb-12 opacity-15 group-hover:opacity-40 transition-opacity absolute -top-8 -left-6 pointer-events-none">
                                 {service.num}
                             </h3>
-                            <div className="relative z-10">
+                            <div className="relative z-10 pt-16">
                                 <h4 className="text-white font-black text-2xl mb-4 uppercase tracking-tighter leading-tight">
                                     {service.title}
                                 </h4>
-                                <p className="text-white font-medium leading-relaxed opacity-90">
+                                <p className="text-white font-normal leading-relaxed opacity-95 text-[15px] md:text-[16px]">
                                     {service.desc}
                                 </p>
                             </div>
@@ -83,11 +93,11 @@ export default function ProductionServices() {
                 </div>
 
                 {/* Advertisement Services */}
-                <motion.h2 
+                <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-white text-3xl md:text-5xl lg:text-6xl font-black uppercase mb-16 tracking-tighter"
+                    className="text-[#F7F2ED] text-[40px] md:text-[60px] lg:text-[72px] font-black uppercase mb-20 tracking-tighter"
                 >
                     ADVERTISEMENT SERVICES
                 </motion.h2>
@@ -96,20 +106,20 @@ export default function ProductionServices() {
                     {ADVERTISEMENT_SERVICES.map((service, i) => (
                         <motion.div
                             key={i}
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
-                            className="bg-[#EC5863] p-10 lg:p-12 hover:scale-[1.03] transition-all duration-500 rounded-[4px] flex flex-col justify-between group h-full shadow-[0_20px_60px_rgba(236,88,99,0.25)] relative overflow-hidden"
+                            className="bg-[#E53B49] p-10 lg:p-12 hover:scale-[1.03] transition-all duration-500 rounded-[4px] flex flex-col justify-between group h-full relative overflow-hidden"
                         >
-                            <h3 className="text-white font-black text-7xl md:text-9xl mb-12 opacity-30 group-hover:opacity-100 transition-opacity absolute -top-4 -left-4">
+                            <h3 className="text-white font-black text-8xl md:text-[140px] mb-12 opacity-15 group-hover:opacity-40 transition-opacity absolute -top-8 -left-6 pointer-events-none">
                                 {service.num}
                             </h3>
-                            <div className="relative z-10">
+                            <div className="relative z-10 pt-16">
                                 <h4 className="text-white font-black text-2xl mb-4 uppercase tracking-tighter leading-tight">
                                     {service.title}
                                 </h4>
-                                <p className="text-white font-medium leading-relaxed opacity-90">
+                                <p className="text-white font-normal leading-relaxed opacity-95 text-[15px] md:text-[16px]">
                                     {service.desc}
                                 </p>
                             </div>

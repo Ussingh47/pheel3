@@ -1298,3 +1298,12 @@ html.lenis body {
 .goal-flip-card-back {
   transform: rotateX(180deg);
 }
+
+/* Production hero logo grid - make all logos pure white */
+.logo-white img {
+  filter: invert(100%) brightness(1000%) grayscale(100%) !important;
+}
+
+html.light-mode .logo-white img {
+  filter: none !important;
+}
